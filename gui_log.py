@@ -58,19 +58,6 @@ class PlacementPrepGUI:
         self.style.configure("Sidebar.TFrame", background="#2f3640")
         self.style.configure("Sidebar.TLabel", background="#2f3640", foreground="white")
         
-        # Main Layout: Sidebar (Dashboard) and Right Pane (Forms)
-        self.main_container = ttk.Frame(self.root)
-        self.main_container.pack(fill=tk.BOTH, expand=True)
-        
-        # Left Sidebar (Stats Dashboard)
-        self.sidebar = tk.Frame(self.main_container, bg="#2f3640", width=250)
-        self.sidebar.pack(side=tk.LEFT, fill=tk.Y)
-        self.sidebar.pack_propagate(False)
-        
-        # Right Notebook (Tabs for logging)
-        self.notebook = ttk.Notebook(self.main_container)
-        self.notebook.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=15, pady=15)
-        
         # Study session tracking state
         self.session_active = False
         self.session_start_dt = None
@@ -195,7 +182,7 @@ This helper tool will automatically:
         self.main_container.pack(fill=tk.BOTH, expand=True)
         
         # Left Sidebar (Stats Dashboard)
-        self.sidebar = tk.Frame(self.main_container, bg="#2f3640", width=250)
+        self.sidebar = tk.Frame(self.main_container, bg="#2f3640", width=280)
         self.sidebar.pack(side=tk.LEFT, fill=tk.Y)
         self.sidebar.pack_propagate(False)
         
@@ -410,8 +397,33 @@ This helper tool will automatically:
 
     # --- UI Setup: Left Sidebar (Dashboard) ---
     def setup_sidebar(self):
+        # Create canvas and scrollbar
+        self.sidebar_canvas = tk.Canvas(self.sidebar, bg="#2f3640", bd=0, highlightthickness=0, width=265)
+        self.sidebar_scrollbar = ttk.Scrollbar(self.sidebar, orient=tk.VERTICAL, command=self.sidebar_canvas.yview)
+        
+        self.sidebar_content = tk.Frame(self.sidebar_canvas, bg="#2f3640", width=265)
+        
+        # Configure canvas window and scrolling
+        self.sidebar_canvas_window = self.sidebar_canvas.create_window((0, 0), window=self.sidebar_content, anchor="nw")
+        
+        def configure_sidebar_scroll(event):
+            self.sidebar_canvas.configure(scrollregion=self.sidebar_canvas.bbox("all"))
+            self.sidebar_canvas.itemconfig(self.sidebar_canvas_window, width=self.sidebar_canvas.winfo_width())
+            
+        self.sidebar_content.bind("<Configure>", configure_sidebar_scroll)
+        self.sidebar_canvas.bind("<Configure>", lambda e: self.sidebar_canvas.itemconfig(self.sidebar_canvas_window, width=e.width))
+        
+        self.sidebar_canvas.configure(yscrollcommand=self.sidebar_scrollbar.set)
+        
+        # Pack canvas and scrollbar
+        self.sidebar_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.sidebar_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Bind Mousewheel to scroll
+        self.sidebar_canvas.bind_all("<MouseWheel>", self.on_mousewheel_scroll)
+
         # Title/Logo Area
-        title_frame = tk.Frame(self.sidebar, bg="#1e222b", pady=20)
+        title_frame = tk.Frame(self.sidebar_content, bg="#1e222b", pady=20)
         title_frame.pack(fill=tk.X)
         
         lbl_title = tk.Label(title_frame, text="PLACEMENT PREP", font=("Segoe UI", 12, "bold"), fg="white", bg="#1e222b")
@@ -420,7 +432,7 @@ This helper tool will automatically:
         lbl_subtitle.pack()
         
         # Study Session Frame
-        self.session_frame = tk.Frame(self.sidebar, bg="#1e222b", padx=10, pady=15)
+        self.session_frame = tk.Frame(self.sidebar_content, bg="#1e222b", padx=10, pady=15)
         self.session_frame.pack(fill=tk.X)
         
         lbl_sess_title = tk.Label(self.session_frame, text="⏱️ STUDY SESSION TIMER", font=("Segoe UI", 9, "bold"), fg="#7f8c8d", bg="#1e222b")
@@ -435,9 +447,9 @@ This helper tool will automatically:
         self.btn_session_toggle = tk.Button(self.session_frame, text="Start Study Session", font=("Segoe UI", 9, "bold"), bg="#4cd137", fg="white",
                                             activebackground="#44bd32", activeforeground="white", bd=0, pady=6, command=self.toggle_study_session)
         self.btn_session_toggle.pack(fill=tk.X)
-
+ 
         # Stats Frame
-        self.stats_frame = tk.Frame(self.sidebar, bg="#2f3640", padx=15, pady=25)
+        self.stats_frame = tk.Frame(self.sidebar_content, bg="#2f3640", padx=15, pady=25)
         self.stats_frame.pack(fill=tk.BOTH, expand=True)
         
         # Labels will be updated by refresh_dashboard
@@ -448,7 +460,7 @@ This helper tool will automatically:
         self.lbl_streak_val = tk.Label(self.stats_frame, text="-", font=("Segoe UI", 12, "bold"), fg="#e1b12c", bg="#2f3640")
         self.lbl_updated_val = tk.Label(self.stats_frame, text="-", font=("Segoe UI", 8), fg="#7f8c8d", bg="#2f3640")
         
-        # Pack layout in sidebar
+        # Pack layout in sidebar content
         self.create_sidebar_stat("Target Focus:", self.lbl_focus_val)
         self.create_sidebar_stat("Solved Questions:", self.lbl_solved_val)
         self.lbl_breakdown_val.pack(anchor=tk.W, pady=(0, 15))
@@ -456,12 +468,16 @@ This helper tool will automatically:
         self.create_sidebar_stat("Days Active:", self.lbl_days_val)
         self.create_sidebar_stat("Current Streak:", self.lbl_streak_val)
         self.create_sidebar_stat("Last Updated:", self.lbl_updated_val)
-
-        # Refresh button at bottom of sidebar
-        btn_refresh = tk.Button(self.sidebar, text="Sync Dashboard", font=("Segoe UI", 9, "bold"), bg="#1e222b", fg="white", 
+ 
+        # Refresh button at bottom of sidebar content
+        btn_refresh = tk.Button(self.sidebar_content, text="Sync Dashboard", font=("Segoe UI", 9, "bold"), bg="#1e222b", fg="white", 
                                 activebackground="#00a8ff", activeforeground="white", bd=0, pady=8, command=self.refresh_dashboard)
-        btn_refresh.pack(side=tk.BOTTOM, fill=tk.X, padx=15, pady=15)
+        btn_refresh.pack(fill=tk.X, padx=15, pady=15)
 
+    def on_mousewheel_scroll(self, event):
+        if hasattr(self, 'sidebar_canvas') and self.sidebar_canvas.winfo_exists():
+            self.sidebar_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+ 
     def create_sidebar_stat(self, header, val_lbl):
         lbl = tk.Label(self.stats_frame, text=header, font=("Segoe UI", 9, "bold"), fg="#7f8c8d", bg="#2f3640")
         lbl.pack(anchor=tk.W, pady=(10, 2))
@@ -478,7 +494,7 @@ This helper tool will automatically:
         focus = focus_match.group(1) if focus_match else "-"
         self.lbl_focus_val.configure(text=focus)
         
-        solved_match = re.search(r"\|\s*\*\*Questions Solved\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|\s*(.*?)\s*\|", content)
+        solved_match = re.search(r"\|\s*\*\*Questions Solved\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|\s*([^|]*(?:\\\|[^|]*)*)\s*\|", content)
         if solved_match:
             self.lbl_solved_val.configure(text=solved_match.group(1))
             self.lbl_breakdown_val.configure(text=solved_match.group(2).replace("\\|", " |"))
