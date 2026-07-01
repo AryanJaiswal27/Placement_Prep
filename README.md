@@ -9,9 +9,9 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | Metric | Status / Value | Details |
 | :--- | :--- | :--- |
 | **Current Focus** | 🎯 Arrays & Dynamic Programming / DBMS | Core DSA + Core CS Subjects |
-| **Questions Solved** | **1** | 🟢 Easy: `0` \| 🟡 Medium: `1` \| 🔴 Hard: `0` |
+| **Questions Solved** | **2** | 🟢 Easy: `0` \| 🟡 Medium: `2` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 03:00 AM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 03:24 AM* | Automatically logged |
 
 ---
 
@@ -22,6 +22,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | *Example* | LeetCode | [Two Sum](https://leetcode.com/problems/two-sum/) | Two Pointers / Hash Map | Python | 🟢 Easy | Hash map complement search / $O(N)$ | [two_sum.py](file:///g:/Placement%20Prep/solutions/two_sum.py) |
 | 2026-07-02 | LeetCode | [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/) | Arrays | Java | 🟡 Medium | Kadanes Algo O(n) | [53_maximum_subarray.java](file:///g:/Placement%20Prep/solutions/53_maximum_subarray.java) |
+| 2026-07-02 | LeetCode | [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) | Strings | Java | 🟡 Medium | Use Array - 128 | [3_longest_substring_without_repeating_characters.java](file:///g:/Placement%20Prep/solutions/3_longest_substring_without_repeating_characters.java) |
 <!-- QUESTIONS_END -->
 
 ---
