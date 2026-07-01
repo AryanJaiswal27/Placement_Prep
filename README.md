@@ -20,7 +20,6 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 <!-- QUESTIONS_START -->
 | Date | Platform | Problem Name & Link | Topic / Pattern | Language | Difficulty | Key Concept / Time Complexity | Code Solution |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Example* | LeetCode | [Two Sum](https://leetcode.com/problems/two-sum/) | Two Pointers / Hash Map | Python | 🟢 Easy | Hash map complement search / $O(N)$ | [two_sum.py](file:///g:/Placement%20Prep/solutions/two_sum.py) |
 | 2026-07-02 | LeetCode | [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/) | Arrays | Java | 🟡 Medium | Kadanes Algo O(n) | [53_maximum_subarray.java](file:///g:/Placement%20Prep/solutions/53_maximum_subarray.java) |
 | 2026-07-02 | LeetCode | [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) | Strings | Java | 🟡 Medium | Use Array - 128 | [3_longest_substring_without_repeating_characters.java](file:///g:/Placement%20Prep/solutions/3_longest_substring_without_repeating_characters.java) |
 <!-- QUESTIONS_END -->
@@ -32,7 +31,6 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 <!-- TECH_START -->
 | Date | Technology / Domain | Topic / Concept Learned | Resources | Confidence | Key Takeaways |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Example* | Python | Decorators & Generators | RealPython / Docs | 🟡 3/5 | Yield vs Return, closures, modifying func behavior |
 <!-- TECH_END -->
 
 ---
@@ -42,7 +40,6 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 <!-- JOURNAL_START -->
 | Date | Time Slot | Category | Activity Description | Focus / Key Takeaway | Next Steps |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Example* | 09:00 AM - 11:30 AM | DSA | Solved Array problems & learned Sliding Window | Mastered variable size window pattern | Move to DP on grids |
 <!-- JOURNAL_END -->
 
 ---
