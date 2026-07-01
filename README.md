@@ -11,7 +11,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | **Current Focus** | 🎯 Arrays & Dynamic Programming / DBMS | Core DSA + Core CS Subjects |
 | **Questions Solved** | **2** | 🟢 Easy: `0` \| 🟡 Medium: `2` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 03:24 AM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 03:36 AM* | Automatically logged |
 
 ---
 
@@ -40,6 +40,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 <!-- JOURNAL_START -->
 | Date | Time Slot | Category | Activity Description | Focus / Key Takeaway | Next Steps |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| 2026-07-02 | 02:56 AM - 03:36 AM | DSA | Solved LeetCode 3 (Longest Substring Without Repeating Characters) | Sliding Window with Array map | Solve more sliding window problems |
 <!-- JOURNAL_END -->
 
 ---
