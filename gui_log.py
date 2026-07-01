@@ -76,6 +76,133 @@ class PlacementPrepGUI:
         self.session_start_dt = None
         self.session_questions_solved = []
 
+        # Check if environment is already initialized
+        if not os.path.exists(README_PATH):
+            self.show_welcome_init_screen()
+        else:
+            self.load_main_dashboard()
+
+    def show_welcome_init_screen(self):
+        self.init_container = ttk.Frame(self.root, padding=30)
+        self.init_container.pack(fill=tk.BOTH, expand=True)
+        
+        lbl_welcome = ttk.Label(self.init_container, text="👋 Welcome to Placement Prep Tracker!", font=("Segoe UI", 18, "bold"))
+        lbl_welcome.pack(pady=(40, 15))
+        
+        desc = (
+            "This application helps you track your coding problems, tech concept notes,\n"
+            "and daily study logs directly inside a structured Markdown file (README.md).\n\n"
+            "We detected that this folder is not initialized yet.\n"
+            "Click the button below to automatically set up the prep environment:\n"
+            "  1. A structured index file (README.md)\n"
+            "  2. A solutions/ directory to store code files\n"
+            "  3. A Git configuration helper (.gitignore)"
+        )
+        lbl_desc = ttk.Label(self.init_container, text=desc, font=("Segoe UI", 10), justify=tk.LEFT)
+        lbl_desc.pack(pady=20)
+        
+        btn_init = tk.Button(self.init_container, text="🚀 Initialize Prep Environment", font=("Segoe UI", 11, "bold"),
+                             bg="#4cd137", fg="white", activebackground="#44bd32", activeforeground="white",
+                             bd=0, padx=25, pady=10, command=self.perform_initialization)
+        btn_init.pack(pady=30)
+
+    def perform_initialization(self):
+        # 1. Create solutions/ dir
+        if not os.path.exists(SOLUTIONS_DIR):
+            os.makedirs(SOLUTIONS_DIR)
+            
+        # 2. Write fresh .gitignore
+        if not os.path.exists(".gitignore"):
+            with open(".gitignore", "w", encoding="utf-8") as f:
+                f.write("__pycache__/\n*.pyc\nbuild/\ndist/\n*.spec\ngui_log.exe\n")
+                
+        # 3. Write fresh README.md
+        fresh_readme_content = """# 🚀 Placement Prep Tracker
+
+A centralized hub to track DSA coding problems, core CS concepts/technologies learned, and a detailed date-wise & time-wise study journal.
+
+---
+
+## 📊 Quick Dashboard
+
+| Metric | Status / Value | Details |
+| :--- | :--- | :--- |
+| **Current Focus** | 🎯 Arrays & Dynamic Programming / DBMS | Core DSA + Core CS Subjects |
+| **Questions Solved** | **0** | 🟢 Easy: `0` \\| 🟡 Medium: `0` \\| 🔴 Hard: `0` |
+| **Days Active** | 📅 `0` Days | Current Streak: `0` Days |
+| **Last Updated** | 🕒 *Never* | Automatically logged |
+
+---
+
+## 📚 Solved Questions Log
+
+<!-- QUESTIONS_START -->
+| Date | Platform | Problem Name & Link | Topic / Pattern | Language | Difficulty | Key Concept / Time Complexity | Code Solution |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+<!-- QUESTIONS_END -->
+
+---
+
+## 💻 Tech Learning Tracker
+
+<!-- TECH_START -->
+| Date | Technology / Domain | Topic / Concept Learned | Resources | Confidence | Key Takeaways |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+<!-- TECH_END -->
+
+---
+
+## 🗓️ Time-Wise Study Journal
+
+<!-- JOURNAL_START -->
+| Date | Time Slot | Category | Activity Description | Focus / Key Takeaway | Next Steps |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+<!-- JOURNAL_END -->
+
+---
+
+## 🛠️ How to Log Your Progress
+
+You can manually edit this file, or use the interactive desktop GUI application.
+
+### Launch Options:
+* **Option 1 (Double-Click)**: Double-click the **`gui_log.exe`** application at the root of this workspace.
+* **Option 2 (Terminal)**: Run the python script in your terminal:
+  ```bash
+  python gui_log.py
+  ```
+
+This helper tool will automatically:
+1. Provide a graphical dashboard and tabs for easy data entry.
+2. Allow you to write or paste solution code directly to save inside the `solutions/` folder.
+3. Automatically commit your logged details and new code solutions to Git with structured commit messages.
+4. Calculate and update dashboard metrics (Streak, Days Active, Solved Counts) instantly on submission.
+"""
+        with open(README_PATH, "w", encoding="utf-8") as f:
+            f.write(fresh_readme_content.strip() + "\n")
+            
+        messagebox.showinfo("Success", "Workspace initialized successfully! Let's get preparing! 🚀")
+        
+        # Destroy welcome frame
+        self.init_container.destroy()
+        
+        # Load main dashboard layout
+        self.load_main_dashboard()
+
+    def load_main_dashboard(self):
+        # Main Layout: Sidebar (Dashboard) and Right Pane (Forms)
+        self.main_container = ttk.Frame(self.root)
+        self.main_container.pack(fill=tk.BOTH, expand=True)
+        
+        # Left Sidebar (Stats Dashboard)
+        self.sidebar = tk.Frame(self.main_container, bg="#2f3640", width=250)
+        self.sidebar.pack(side=tk.LEFT, fill=tk.Y)
+        self.sidebar.pack_propagate(False)
+        
+        # Right Notebook (Tabs for logging)
+        self.notebook = ttk.Notebook(self.main_container)
+        self.notebook.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=15, pady=15)
+        
         self.setup_sidebar()
         self.setup_tabs()
         
@@ -848,7 +975,6 @@ class PlacementPrepGUI:
         if content:
             focus_match = re.search(r"\|\s*\*\*Current Focus\*\*\s*\|\s*(.*?)\s*\|", content)
             focus = focus_match.group(1) if focus_match else ""
-            # Strip emojis or keep them
             self.ent_focus_value.insert(0, focus)
             
         self.tab_focus.columnconfigure(1, weight=1)
@@ -856,11 +982,30 @@ class PlacementPrepGUI:
         
         # Button Panel
         btn_panel = ttk.Frame(self.tab_focus)
-        btn_panel.grid(row=row, column=0, columnspan=2, sticky=tk.E, pady=25)
+        btn_panel.grid(row=row, column=0, columnspan=2, sticky=tk.E, pady=15)
         
         btn_submit = tk.Button(btn_panel, text="Update Focus Area", font=("Segoe UI", 10, "bold"), bg="#00a8ff", fg="white", 
                                activebackground="#0097e6", activeforeground="white", bd=0, padx=15, pady=6, command=self.submit_focus_goal)
         btn_submit.pack()
+        row += 1
+
+        # Separator line
+        sep = ttk.Separator(self.tab_focus, orient=tk.HORIZONTAL)
+        sep.grid(row=row, column=0, columnspan=2, sticky=tk.EW, pady=(15, 10))
+        row += 1
+
+        # Danger Zone
+        lbl_danger_head = ttk.Label(self.tab_focus, text="⚠️ Danger Zone", style="Header.TLabel", foreground="#e84118")
+        lbl_danger_head.grid(row=row, column=0, columnspan=2, sticky=tk.W, pady=5)
+        row += 1
+
+        lbl_danger_desc = ttk.Label(self.tab_focus, text="Clears all your logged questions, tech learning concepts, and study journal logs from README.md.\nNote: This will reset all your dashboard stats back to 0. Solution code files in solutions/ are preserved.", font=("Segoe UI", 9, "italic"), justify=tk.LEFT)
+        lbl_danger_desc.grid(row=row, column=0, columnspan=2, sticky=tk.W, pady=5)
+        row += 1
+
+        btn_reset = tk.Button(self.tab_focus, text="Reset Prep Tracker Logs", font=("Segoe UI", 10, "bold"), bg="#e84118", fg="white",
+                              activebackground="#c23616", activeforeground="white", bd=0, padx=15, pady=6, command=self.reset_workspace_logs)
+        btn_reset.grid(row=row, column=0, columnspan=2, sticky=tk.W, pady=10)
 
     def submit_focus_goal(self):
         new_focus = self.ent_focus_value.get().strip()
@@ -887,6 +1032,59 @@ class PlacementPrepGUI:
         
         self.refresh_dashboard()
         messagebox.showinfo("Success", f"Focus target updated successfully to:\n{new_focus}")
+
+    def reset_workspace_logs(self):
+        # Double Confirmation
+        confirm1 = messagebox.askyesno("⚠️ Confirm Reset - Step 1 of 2", 
+            "Are you sure you want to reset all tracker logs?\n\nThis will clear all solved questions, tech notes, and study journal entries in README.md, and reset dashboard statistics back to 0.")
+        if not confirm1:
+            return
+            
+        confirm2 = messagebox.askyesno("🚨 Final Warning - Step 2 of 2",
+            "This action CANNOT be undone. Are you absolutely sure you want to wipe all logs from README.md clean?")
+        if not confirm2:
+            return
+            
+        content = self.read_readme()
+        if not content:
+            messagebox.showerror("Error", "README.md not found in the current workspace.")
+            return
+            
+        # Clear tables by returning them to empty headers
+        # 1. Questions Log
+        content = re.sub(
+            r"<!-- QUESTIONS_START -->.*?<!-- QUESTIONS_END -->", 
+            "<!-- QUESTIONS_START -->\n| Date | Platform | Problem Name & Link | Topic / Pattern | Language | Difficulty | Key Concept / Time Complexity | Code Solution |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n<!-- QUESTIONS_END -->", 
+            content, 
+            flags=re.DOTALL
+        )
+        
+        # 2. Tech Tracker
+        content = re.sub(
+            r"<!-- TECH_START -->.*?<!-- TECH_END -->",
+            "<!-- TECH_START -->\n| Date | Technology / Domain | Topic / Concept Learned | Resources | Confidence | Key Takeaways |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n<!-- TECH_END -->",
+            content,
+            flags=re.DOTALL
+        )
+        
+        # 3. Journal
+        content = re.sub(
+            r"<!-- JOURNAL_START -->.*?<!-- JOURNAL_END -->",
+            "<!-- JOURNAL_START -->\n| Date | Time Slot | Category | Activity Description | Focus / Key Takeaway | Next Steps |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n<!-- JOURNAL_END -->",
+            content,
+            flags=re.DOTALL
+        )
+        
+        # Reset Dashboard stats
+        content = self.update_dashboard_metrics(content)
+        self.write_readme(content)
+        
+        # Commit & Push changes to github
+        self.handle_git_commit_and_push([README_PATH], "chore: reset placement prep tracker logs and statistics", should_push=True)
+        
+        self.refresh_dashboard()
+        messagebox.showinfo("Success", "Workspace logs reset successfully! Ready for a fresh start! 🚀")
+
     def toggle_study_session(self):
         if not self.session_active:
             self.session_active = True
