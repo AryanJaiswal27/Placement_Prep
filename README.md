@@ -40,7 +40,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 <!-- JOURNAL_START -->
 | Date | Time Slot | Category | Activity Description | Focus / Key Takeaway | Next Steps |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2026-07-02 | 02:56 AM - 03:36 AM | DSA | Solved LeetCode 3 (Longest Substring Without Repeating Characters) | Sliding Window with Array map | Solve more sliding window problems |
+| 2026-07-02 | 02:56 AM - 03:36 AM | DSA | Solved LeetCode 53 (Maximum Subarray) & LeetCode 3 (Longest Substring Without Repeating Characters) | Kadane's Algorithm & Sliding Window with Array map | Solve more array and sliding window problems |
 <!-- JOURNAL_END -->
 
 ---
