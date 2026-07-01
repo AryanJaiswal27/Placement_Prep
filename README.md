@@ -8,10 +8,10 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 
 | Metric | Status / Value | Details |
 | :--- | :--- | :--- |
-| **Current Focus** | 🎯 Arrays & Dynamic Programming / DBMS | Core DSA + Core CS Subjects |
+| **Current Focus** | Getting a Higher Package ;) | Core DSA + Core CS Subjects |
 | **Questions Solved** | **5** | 🟢 Easy: `2` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 04:03 AM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 04:18 AM* | Automatically logged |
 
 ---
 
