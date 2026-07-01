@@ -177,18 +177,22 @@ This helper tool will automatically:
         self.load_main_dashboard()
 
     def load_main_dashboard(self):
-        # Main Layout: Sidebar (Dashboard) and Right Pane (Forms)
-        self.main_container = ttk.Frame(self.root)
-        self.main_container.pack(fill=tk.BOTH, expand=True)
+        # Main Layout: horizontal PanedWindow separating Sidebar and Forms
+        self.paned_window = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
+        self.paned_window.pack(fill=tk.BOTH, expand=True)
         
-        # Left Sidebar (Stats Dashboard)
-        self.sidebar = tk.Frame(self.main_container, bg="#2f3640", width=280)
-        self.sidebar.pack(side=tk.LEFT, fill=tk.Y)
+        # Left Sidebar container (Stats Dashboard)
+        self.sidebar = tk.Frame(self.paned_window, bg="#2f3640", width=280)
         self.sidebar.pack_propagate(False)
         
         # Right Notebook (Tabs for logging)
-        self.notebook = ttk.Notebook(self.main_container)
-        self.notebook.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=15, pady=15)
+        self.notebook_frame = ttk.Frame(self.paned_window, padding=(15, 15))
+        self.notebook = ttk.Notebook(self.notebook_frame)
+        self.notebook.pack(fill=tk.BOTH, expand=True)
+        
+        # Add panes
+        self.paned_window.add(self.sidebar, weight=0)
+        self.paned_window.add(self.notebook_frame, weight=1)
         
         self.setup_sidebar()
         self.setup_tabs()
@@ -494,7 +498,7 @@ This helper tool will automatically:
         focus = focus_match.group(1) if focus_match else "-"
         self.lbl_focus_val.configure(text=focus)
         
-        solved_match = re.search(r"\|\s*\*\*Questions Solved\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|\s*([^|]*(?:\\\|[^|]*)*)\s*\|", content)
+        solved_match = re.search(r"\|\s*\*\*Questions Solved\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|\s*(.*?)\s*(?<!\\)\|", content)
         if solved_match:
             self.lbl_solved_val.configure(text=solved_match.group(1))
             self.lbl_breakdown_val.configure(text=solved_match.group(2).replace("\\|", " |"))
