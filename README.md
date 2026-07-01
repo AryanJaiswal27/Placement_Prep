@@ -52,11 +52,14 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 
 ## 🛠️ How to Log Your Progress
 
-You can manually edit this file, or use the interactive desktop GUI application provided in this workspace:
+You can manually edit this file, or use the interactive desktop GUI application.
 
-```bash
-python gui_log.py
-```
+### Launch Options:
+* **Option 1 (Double-Click)**: Double-click the **`gui_log.exe`** application at the root of this workspace.
+* **Option 2 (Terminal)**: Run the python script in your terminal:
+  ```bash
+  python gui_log.py
+  ```
 
 This helper tool will automatically:
 1. Provide a graphical dashboard and tabs for easy data entry.

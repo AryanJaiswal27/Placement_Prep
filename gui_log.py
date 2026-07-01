@@ -1026,6 +1026,22 @@ class SessionSummaryDialog(tk.Toplevel):
         btn_save = tk.Button(btn_frame, text="Log to Journal", bg="#4cd137", fg="white", bd=0, padx=15, pady=5, command=self.on_save)
         btn_save.pack(side=tk.RIGHT, padx=5)
 
+    def on_save(self):
+        date = self.ent_date.get().strip()
+        time_slot = self.ent_time.get().strip()
+        category = self.cmb_cat.get().strip()
+        desc = self.ent_desc.get().strip()
+        takeaway = self.ent_takeaway.get().strip()
+        next_steps = self.ent_next.get().strip()
+        should_git = self.var_git.get()
+        
+        if not desc:
+            messagebox.showerror("Error", "Description is required!")
+            return
+            
+        self.save_callback(date, time_slot, category, desc, takeaway, next_steps, should_git)
+        self.destroy()
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = PlacementPrepGUI(root)
