@@ -9,9 +9,9 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | Metric | Status / Value | Details |
 | :--- | :--- | :--- |
 | **Current Focus** | Getting a Higher Package ;) | Core DSA + Core CS Subjects |
-| **Questions Solved** | **5** | 🟢 Easy: `2` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
+| **Questions Solved** | **6** | 🟢 Easy: `3` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 01:22 PM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 01:33 PM* | Automatically logged |
 
 ---
 
@@ -25,6 +25,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | 2026-07-02 | LeetCode | [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/) | Trees & Binary Trees | Java | 🟢 Easy | EASY AS F | [104_maximum_depth_of_binary_tree.java](file:///g:/Placement%20Prep/solutions/104_maximum_depth_of_binary_tree.java) |
 | 2026-07-02 | LeetCode | [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/description/) | Trees & Binary Trees | Java | 🟢 Easy | EASY AS F | [226_invert_binary_tree.java](file:///g:/Placement%20Prep/solutions/226_invert_binary_tree.java) |
 | 2026-07-02 | LeetCode | [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/) | Trees & Binary Trees | Java | 🟡 Medium | DIFF and Queue | [102_binary_tree_level_order_traversal.java](file:///g:/Placement%20Prep/solutions/102_binary_tree_level_order_traversal.java) |
+| 2026-07-02 | LeetCode | [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?__cf_chl_f_tk=IQ9Ml4.DlJ.MPPWyw_e5a6HRrR2rtGb.qNQ5ifHXkVo-1782978856-1.0.1.1-ewVsYBY9iEvPTPagl9KFLO708gP9gRz2gdcaC3D62cE) | Arrays | Java | 🟢 Easy | Easy DP maybe | [121_best_time_to_buy_and_sell_stock.java](file:///g:/Placement%20Prep/solutions/121_best_time_to_buy_and_sell_stock.java) |
 <!-- QUESTIONS_END -->
 
 ---
