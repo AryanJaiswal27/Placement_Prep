@@ -9,9 +9,9 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | Metric | Status / Value | Details |
 | :--- | :--- | :--- |
 | **Current Focus** | Getting a Higher Package ;) | Core DSA + Core CS Subjects |
-| **Questions Solved** | **7** | 🟢 Easy: `4` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
+| **Questions Solved** | **8** | 🟢 Easy: `5` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 01:48 PM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 01:55 PM* | Automatically logged |
 
 ---
 
@@ -27,6 +27,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | 2026-07-02 | LeetCode | [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/) | Trees & Binary Trees | Java | 🟡 Medium | DIFF and Queue | [102_binary_tree_level_order_traversal.java](file:///g:/Placement%20Prep/solutions/102_binary_tree_level_order_traversal.java) |
 | 2026-07-02 | LeetCode | [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?__cf_chl_f_tk=IQ9Ml4.DlJ.MPPWyw_e5a6HRrR2rtGb.qNQ5ifHXkVo-1782978856-1.0.1.1-ewVsYBY9iEvPTPagl9KFLO708gP9gRz2gdcaC3D62cE) | Arrays | Java | 🟢 Easy | Easy DP maybe | [121_best_time_to_buy_and_sell_stock.java](file:///g:/Placement%20Prep/solutions/121_best_time_to_buy_and_sell_stock.java) |
 | 2026-07-02 | LeetCode | [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/) | Stacks & Queues | Java | 🟢 Easy | Stack | [20_valid_parentheses.java](file:///g:/Placement%20Prep/solutions/20_valid_parentheses.java) |
+| 2026-07-02 | LeetCode | [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/) | Linked Lists | Java | 🟢 Easy | 3 pointers | [206_reverse_linked_list.java](file:///g:/Placement%20Prep/solutions/206_reverse_linked_list.java) |
 <!-- QUESTIONS_END -->
 
 ---
