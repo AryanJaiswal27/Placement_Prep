@@ -11,7 +11,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | **Current Focus** | Getting a Higher Package ;) | Core DSA + Core CS Subjects |
 | **Questions Solved** | **8** | 🟢 Easy: `5` \| 🟡 Medium: `3` \| 🔴 Hard: `0` |
 | **Days Active** | 📅 `1` Days | Current Streak: `1` Days |
-| **Last Updated** | 🕒 *2026-07-02 01:55 PM* | Automatically logged |
+| **Last Updated** | 🕒 *2026-07-02 02:23 PM* | Automatically logged |
 
 ---
 
@@ -50,6 +50,7 @@ A centralized hub to track DSA coding problems, core CS concepts/technologies le
 | 2026-07-02 | 03:40 AM - 03:45 AM | DSA | Solved 104. Maximum Depth of Binary Tree |  |  |
 | 2026-07-02 | 03:46 AM - 04:03 AM | DSA | Solved: 226. Invert Binary Tree, 102. Binary Tree Level Order Traversal | Testing Session Here | Go to sleep |
 | 2026-07-02 | 11:57 AM - 01:21 PM | Other | Studied about AI and Research Papers | Need to learn AI |  |
+| 2026-07-02 | 01:33 PM - 02:23 PM | DSA | Solved: 20. Valid Parentheses, 206. Reverse Linked List |  |  |
 <!-- JOURNAL_END -->
 
 ---
